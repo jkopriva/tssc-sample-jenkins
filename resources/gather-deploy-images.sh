@@ -26,7 +26,7 @@ function get-images-per-env() {
 	    fi
      
 	    # Workaround for RHTAPBUGS-1284
-	    if [[ "$image" =~ "quay.io/redhat-appstudio/dance-bootstrap-app" ]]; then
+	    if [[ "$image" =~ "quay.io/redhat-appstudio/dance-bootstrap-app@sha256:2868e6f7b23a5c7ce7376e3421a07fafaf22007c5f48c3ae56cd0a00ae8064e8" ]]; then
 	      # Don't check the dance-bootstrap-app image
 	      continue
 	    fi
