@@ -17,7 +17,8 @@ function get-images-per-env() {
 	for env in development stage prod; do
 	  yaml_path=components/${component_name}/overlays/${env}/deployment-patch.yaml
 	  image=$(yq "$IMAGE_PATH" "$yaml_path")
-	
+	  echo "Image to check:"
+   	  echo $image
 	  if [ -n "$TARGET_BRANCH" ]; then
 	    prev_image=$(git show "origin/$TARGET_BRANCH:$yaml_path" | yq "$IMAGE_PATH")
 	    if [ "$prev_image" = "$image" ]; then
