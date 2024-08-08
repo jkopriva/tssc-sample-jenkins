@@ -13,13 +13,9 @@ function get-images-per-env() {
 	IMAGE_PATH='.spec.template.spec.containers[0].image'
 	IMAGES_FILE=$HOMEDIR/all-images.txt
 	component_name=$(yq .metadata.name application.yaml)
-	echo "$component_name"
 	for env in development stage prod; do
 	  yaml_path=components/${component_name}/overlays/${env}/deployment-patch.yaml
-   	  echo "$yaml_path"
 	  image=$(yq "$IMAGE_PATH" "$yaml_path")
-	  echo "Image to check:"
-   	  echo "$image"
 	  if [ -n "$TARGET_BRANCH" ]; then
 	    prev_image=$(git show "origin/$TARGET_BRANCH:$yaml_path" | yq "$IMAGE_PATH")
 	    if [ "$prev_image" = "$image" ]; then
