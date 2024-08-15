@@ -19,6 +19,7 @@ function patch-gitops() {
 	  password=$GITOPS_AUTH_PASSWORD
    	  echo Token:
       	  echo $password
+	  echo $GITOPS_AUTH_USERNAME
 	  if [[ -n "$GITOPS_AUTH_USERNAME" ]]; then
 	    username=$(cat /gitops-auth-secret/username)
 	    echo "https://${username}:${password})@${hostname}" > "${HOME}/.git-credentials"
