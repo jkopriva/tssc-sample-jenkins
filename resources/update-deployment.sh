@@ -16,7 +16,9 @@ function patch-gitops() {
 	if [[ -n "$GITOPS_AUTH_PASSWORD" ]]; then
 	  gitops_repo_url=${GITOPS_REPO_URL%'.git'}
 	  remote_without_protocol=${gitops_repo_url#'https://'} 
-	  password=$GITOPS_AUTH_PASSWORD 
+	  password=$GITOPS_AUTH_PASSWORD
+   	  echo $GITOPS_AUTH_PASSWORD
+          echo $GITOPS_AUTH_USERNAME
 	  if [[ -n "$GITOPS_AUTH_USERNAME" ]]; then
 	    username=$GITOPS_AUTH_USERNAME
 	    echo "https://${username}:${password})@${hostname}" > "${HOME}/.git-credentials"
@@ -48,7 +50,7 @@ function patch-gitops() {
 	git add .
 	git commit -m "Update '${component_name}' component image to: ${PARAM_IMAGE}"
 	git remote set-url origin $origin_with_auth
-	git push 2> /dev/null || \
+	git push || \
 	{
 	  echo "Failed to push update to gitops repository: ${GITOPS_REPO_URL}"
 	  echo 'Do you have correct git credentials configured?'
