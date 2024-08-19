@@ -21,6 +21,7 @@ function patch-gitops() {
           echo $GITOPS_AUTH_USERNAME
 	  if [[ -n "$GITOPS_AUTH_USERNAME" ]]; then
 	    username=$GITOPS_AUTH_USERNAME
+            echo "https://${username}:${password})@${hostname}"
 	    echo "https://${username}:${password})@${hostname}" > "${HOME}/.git-credentials"
 	    origin_with_auth=https://${username}:${password}@${remote_without_protocol}.git
 	  else
